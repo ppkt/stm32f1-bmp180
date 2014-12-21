@@ -11,14 +11,13 @@ int main(void)
 {
 	USART2_Init(9600);
 
-//	NVIC_Configuration();
-	if (SysTick_Config(SystemCoreClock / 1000))  while (1);
+	NVIC_Configuration();
 	I2C_LowLevel_Init(I2C1);
 
+	// Tick every 1 ms
+	if (SysTick_Config(SystemCoreClock / 1000))  while (1);
+
 	printf("Ready\n\r");
-	printf("A ");
-	delay(100);
-	printf("B ");
 	if (bmp180_check_presence()) {
 		printf("Sensor is present\n\r");
 	} else {
@@ -27,9 +26,9 @@ int main(void)
 	}
 
 	CalibrationData data;
+	data.oss = 3;
 	bmp180_get_calibration_data(&data);
 	bmp180_get_uncompensated_temperature(&data);
-	data.oss = 0;
 	bmp180_get_uncompensated_pressure(&data);
 	bmp180_calculate_true_temperature(&data);
 	bmp180_calculate_true_pressure(&data);
@@ -38,7 +37,6 @@ int main(void)
     while(1)
     {
 
-//        I2C_Master_BufferWrite(I2C1, Buffer_Tx1, 1, Polling, 0xEE);
     }
 }
 

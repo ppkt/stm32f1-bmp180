@@ -1,2 +1,4 @@
 *.pbxproj
 Debug
+*.cogui
+stm32f1-bmp180.comarker
