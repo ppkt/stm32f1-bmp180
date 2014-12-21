@@ -37,6 +37,13 @@ typedef struct {
 
 } CalibrationData;
 
+typedef enum {
+	BMP180_MODE_ULTRA_LOW_POWER = 0,
+	BMP180_MODE_STANDARD = 1,
+	BMP180_MODE_HIGH_RESOLUTION = 2,
+	BMP180_MODE_ULTRA_HIGH_RESOLUTION = 3,
+} BMP180_Mode;
+
 bool bmp180_check_presence();
 void bmp180_get_calibration_data(CalibrationData* data);
 void bmp180_get_uncompensated_temperature(CalibrationData* data);
